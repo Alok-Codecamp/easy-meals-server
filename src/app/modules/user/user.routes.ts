@@ -6,6 +6,13 @@ const router = Router();
 
 router.post('/register', userController.createUser)
 
+router.get('/users', userController.getAllUser);
+
+router.get('/users/:userEmail', userController.getAllUser);
+
+
+
+
 
 
 

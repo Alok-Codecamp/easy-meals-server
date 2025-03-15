@@ -9,4 +9,8 @@ export default {
     app_mode: process.env.APP_MODE,
     port: process.env.PORT,
     mongodb_uri: process.env.MONGODB_URI,
+    salt_rounds: process.env.SALT_ROUNDS,
+    jwt_access_secret: process.env.JWT_ACCESS_SECRET,
+    jwt_access_expiresIn: process.env.JWT_ACCESS_EXPIRESIN,
+    google_app_pass: process.env.GOOGLE_APP_PASS,
 }
