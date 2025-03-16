@@ -2,14 +2,16 @@ import { Server } from "http";
 import app from "./app";
 import config from "./app/modules/config/config";
 import mongoose from "mongoose";
-
+import dotenv from 'dotenv';
+dotenv.config();
+const PORT = process.env.PORT || 5000
 let server: Server;
 
 async function main() {
     try {
         await mongoose.connect(config.mongodb_uri as string)
-        server = app.listen(config.port, () => {
-            console.log(`easy-meals server running on port ${config.port}`);
+        server = app.listen(PORT, () => {
+            console.log(`easy-meals server running on port ${PORT}`);
         })
     }
     catch (err) {
