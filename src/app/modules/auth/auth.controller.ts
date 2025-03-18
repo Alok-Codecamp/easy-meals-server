@@ -2,7 +2,7 @@ import status from "http-status";
 import asyncWraper from "../../utils/asyncWraper";
 import { authServices } from "./auth.service";
 import sendResponse from "../../utils/sendResponse";
-import config from "../config/config";
+import config from "../../config/config";
 
 
 const login = asyncWraper(async (req, res) => {

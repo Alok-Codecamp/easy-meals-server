@@ -1,4 +1,6 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
+import { JwtPayload } from "jsonwebtoken";
+
 
 const asyncWraper = (fn: RequestHandler) => {
     return (req: Request, res: Response, next: NextFunction) => {
@@ -6,4 +8,4 @@ const asyncWraper = (fn: RequestHandler) => {
     }
 }
 
-export default (asyncWraper)
+export default asyncWraper

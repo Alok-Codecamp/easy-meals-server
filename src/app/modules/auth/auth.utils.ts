@@ -1,5 +1,5 @@
 import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken'
-import config from '../config/config';
+import config from '../../config/config';
 
 export const createToken = (payload: {}, jwt_secret: string, jwt_expiresIn: string) => {
     const option: SignOptions = {

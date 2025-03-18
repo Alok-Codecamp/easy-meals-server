@@ -1,5 +1,0 @@
-
-
-const authValidator = (requiredRoles: "customer" | "mealProvider") => {
-
-}

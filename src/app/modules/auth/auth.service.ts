@@ -1,6 +1,6 @@
 
 import { sendMail } from "../../utils/sendMail";
-import config from "../config/config";
+import config from "../../config/config";
 import { UserModel } from "../user/user.model"
 import { createToken, verifyToken } from "./auth.utils";
 
@@ -8,7 +8,9 @@ import { createToken, verifyToken } from "./auth.utils";
 
 const login = async (loginData: { contact: string, password: string }) => {
     const { contact, password } = loginData;
-    const isUserExists = await UserModel.findOne({ $or: [{ email: contact }, { phone: contact }] })
+    // console.log(loginData);
+    const isUserExists = await UserModel.findOne({ $or: [{ email: contact }, { phone: contact }] });
+    // console.log(isUserExists);
     if (!isUserExists) {
         throw new Error('Invalid Email or Phone')
     }

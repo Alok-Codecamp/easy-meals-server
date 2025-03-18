@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import config from "../modules/config/config";
+import config from "../config/config";
 
 
 
