@@ -19,6 +19,7 @@ const userSchema = new Schema<IUser, IUserModel>(
         },
         phone: {
             type: String,
+            unique: true,
             required: true
         },
         password: {

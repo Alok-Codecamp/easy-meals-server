@@ -20,6 +20,7 @@ const login = async (loginData: { contact: string, password: string }) => {
         throw new Error('Invalid password!!')
     }
     const jwtPayload = {
+        id: isUserExists._id,
         contact,
         role: isUserExists?.role
     }
@@ -43,6 +44,7 @@ const refreshToken = async (token: string) => {
         throw new Error('Invalid Email or Phone')
     }
     const jwtPayload = {
+        id: isUserExists._id,
         contact,
         role,
     }

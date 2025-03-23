@@ -17,10 +17,10 @@ app.get('/', (req: Request, res: Response) => {
     res.json('EasyMeals server is live and running smoothly!')
 })
 
-app.use('/users', userRoutes)
+app.use('/', userRoutes)
 app.use('/auth', authRoutes)
 app.use('/', mealProviderRoutes)
-app.use('/order', orderRoutes)
+app.use('/', orderRoutes)
 
 
 

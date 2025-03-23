@@ -2,6 +2,7 @@ import status from "http-status";
 import asyncWraper from "../../utils/asyncWraper";
 import sendResponse from "../../utils/sendResponse";
 import { orderServices } from "./orders.service";
+import { Request, Response } from "express";
 
 
 
@@ -28,8 +29,9 @@ const getOrders = asyncWraper(async (req, res) => {
         data: result
     })
 })
-const getOrderById = asyncWraper(async (req, res) => {
-    const result = await orderServices.getOrderByIdFromDb(req.params.orderId);
+const getOrdersPlacedByCustomer = asyncWraper(async (req: Request, res: Response) => {
+    const userData = req.user;
+    const result = await orderServices.getOrdersPlacedByCustomerFromDb(userData?.id as string);
 
     sendResponse(res, {
         status: status.OK,
@@ -55,7 +57,7 @@ const updateOrder = asyncWraper(async (req, res) => {
 export const orderController = {
     createOrder,
     getOrders,
-    getOrderById,
+    getOrdersPlacedByCustomer,
     updateOrder,
 }
 

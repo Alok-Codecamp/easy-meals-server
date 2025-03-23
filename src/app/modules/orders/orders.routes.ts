@@ -7,10 +7,12 @@ import { orderController } from "./orders.controller";
 const router = Router();
 
 
-router.post('/create-order', authValidator('customer'), orderController.createOrder);
-router.get('/', authValidator('mealProvider'), orderController.getOrders);
-router.get('/:orderId', authValidator('customer', 'mealProvider'), orderController.getOrderById);
-router.put('/:orderId', authValidator('mealProvider'), orderController.updateOrder);
+router.post('/customers/order', authValidator('customer'), orderController.createOrder);
+router.get('/providers/orders', authValidator('mealProvider'), orderController.getOrders);
+
+router.get('/customers/orders', authValidator('customer'), orderController.getOrdersPlacedByCustomer);
+
+router.put('/providers/response', authValidator('mealProvider'), orderController.updateOrder);
 
 
 export const orderRoutes = router;

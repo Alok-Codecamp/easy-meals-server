@@ -24,7 +24,7 @@ export const authValidator = (...requiredRoles: TUserRole[]) => {
         if (!decoded) {
             throw new Error('Your login session expired! please login!')
         }
-        const { contact, role } = decoded;
+        const { contact, role, id } = decoded;
 
         console.log(decoded);
         if (requiredRoles && !requiredRoles.includes(role)) {
@@ -33,7 +33,7 @@ export const authValidator = (...requiredRoles: TUserRole[]) => {
         }
 
         // assign user property inside request 
-        req.user = { contact, role }
+        req.user = { id, contact, role }
         console.log(req.user);
         next()
     })
