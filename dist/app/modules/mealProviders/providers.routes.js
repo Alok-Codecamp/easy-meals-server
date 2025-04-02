@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.mealProviderRoutes = void 0;
+const express_1 = require("express");
+;
+const providers_controller_1 = require("./providers.controller");
+const authValidator_1 = require("../../middleware/authValidator");
+const router = (0, express_1.Router)();
+router.post('/create-mealProvider', (0, authValidator_1.authValidator)('customer'), providers_controller_1.mealProviderController.createMealProvider);
+router.get('/mealProvider', providers_controller_1.mealProviderController.getMealProviders);
+router.post('mealProvider/:mealProviderId', (0, authValidator_1.authValidator)('mealProvider'), providers_controller_1.mealProviderController.getMealProviderById);
+exports.mealProviderRoutes = router;
