@@ -30,6 +30,7 @@ const login = (loginData) => __awaiter(void 0, void 0, void 0, function* () {
         throw new Error('Invalid password!!');
     }
     const jwtPayload = {
+        id: isUserExists._id,
         contact,
         role: isUserExists === null || isUserExists === void 0 ? void 0 : isUserExists.role
     };
@@ -48,6 +49,7 @@ const refreshToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
         throw new Error('Invalid Email or Phone');
     }
     const jwtPayload = {
+        id: isUserExists._id,
         contact,
         role,
     };

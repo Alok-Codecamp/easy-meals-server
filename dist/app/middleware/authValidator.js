@@ -13,29 +13,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authValidator = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = __importDefault(require("../config/config"));
-const auth_utils_1 = require("../modules/auth/auth.utils");
-const user_model_1 = require("../modules/user/user.model");
 const asyncWraper_1 = __importDefault(require("../utils/asyncWraper"));
 const authValidator = (...requiredRoles) => {
     return (0, asyncWraper_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         const token = req.headers.authorization;
-        // Check if the token is missing
+        // check if the token is valied
         if (!token) {
             throw new Error('Unauthorized user!');
         }
-        const decoded = (0, auth_utils_1.verifyToken)(token, config_1.default.jwt_access_secret);
-        const { contact, role, iat } = decoded;
-        const isUserExists = yield user_model_1.UserModel.findOne({ $or: [{ email: contact }, { phone: contact }] });
-        //check if the user is missing
-        if (!isUserExists) {
-            throw new Error('User not found!');
+        const decoded = jsonwebtoken_1.default.verify(token, config_1.default.jwt_access_secret);
+        if (!decoded) {
+            throw new Error('Your login session expired! please login!');
         }
+        const { contact, role, id } = decoded;
+        console.log(decoded);
         if (requiredRoles && !requiredRoles.includes(role)) {
-            throw new Error(`you are unauthorized!`);
+            throw new Error(`OH! You are not ${requiredRoles.join(', ')}`);
         }
-        console.log('auth pass');
-        req.user = decoded;
+        // assign user property inside request 
+        req.user = { id, contact, role };
         console.log(req.user);
         next();
     }));
