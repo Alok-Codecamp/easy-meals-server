@@ -29,6 +29,8 @@ const getUserByEmail = async (userEmail: string) => {
     return result;
 }
 
+
+
 export const userServices = {
     createUserIntoDb,
     getAllUserFromDb,

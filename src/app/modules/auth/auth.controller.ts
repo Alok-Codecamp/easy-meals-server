@@ -46,9 +46,18 @@ const forgetPassword = asyncWraper(async (req, res) => {
     })
 })
 
-
+const resetPassword = asyncWraper(async (req, res) => {
+    const result = await authServices.resetPassword(req.body)
+    sendResponse(res, {
+        status: status.OK,
+        success: true,
+        message: 'password reset successfull custom',
+        data: result
+    })
+})
 export const authController = {
     login,
     refreshToken,
     forgetPassword,
+    resetPassword,
 }

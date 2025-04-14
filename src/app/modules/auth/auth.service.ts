@@ -3,7 +3,7 @@ import { sendMail } from "../../utils/sendMail";
 import config from "../../config/config";
 import { UserModel } from "../user/user.model"
 import { createToken, verifyToken } from "./auth.utils";
-
+import bcrypt from 'bcrypt'
 
 
 const login = async (loginData: { contact: string, password: string }) => {
@@ -55,6 +55,7 @@ const refreshToken = async (token: string) => {
 
 
 const forgetPassword = async (email: string) => {
+
     const isUserExists = await UserModel.isUserExistsByEmail(email);
 
     if (!isUserExists) {
@@ -68,17 +69,47 @@ const forgetPassword = async (email: string) => {
 
     const resetToken = createToken(jwtPayload, config.jwt_access_secret as string, config.jwt_access_expiresIn as string);
 
-    const resetUrl = `http://localhost:5173/reset-password?email=${isUserExists.email}&token=${resetToken}`
+    const resetUrl = `http://localhost:3000/reset-password?email=${isUserExists.email}&token=${resetToken}`
 
     const responseEmail = await sendMail(isUserExists.email, resetUrl);
 
     return responseEmail;
 }
 
+const resetPassword = async (payload: { email: string; token: string; newPassword: string }) => {
+    const { email, token, newPassword } = payload;
+    if (!token) {
+        throw new Error("Token couldn't found"!!)
+    }
+    else if (!email) {
+        throw new Error("Email couldn't found!")
+    }
+    const decoded = verifyToken(token, config.jwt_access_secret as string);
+
+    const isUserExists = await UserModel.findOne({ $or: [{ email: decoded.contact }, { phone: decoded.contact }] })
+    if (!isUserExists) {
+        throw new Error("User doesn't exists");
+    }
+
+    if (isUserExists?.email !== email) {
+        throw new Error("User doesn't exists");
+    }
+    // console.log(payload);
+    const hashedPassword = await bcrypt.hash(payload.newPassword, Number(config.salt_rounds as string))
+    const result = await UserModel.findOneAndUpdate({ password: hashedPassword })
+
+    console.log(result);
+    return result;
+
+
+
+
+}
 
 export const authServices = {
     login,
     refreshToken,
     forgetPassword,
+    resetPassword,
 
 }
