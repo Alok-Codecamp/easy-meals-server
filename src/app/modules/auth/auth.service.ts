@@ -8,7 +8,7 @@ import bcrypt from 'bcrypt'
 
 const login = async (loginData: { contact: string, password: string }) => {
     const { contact, password } = loginData;
-    // console.log(loginData);
+
     const isUserExists = await UserModel.findOne({ $or: [{ email: contact }, { phone: contact }] });
     // console.log(isUserExists);
     if (!isUserExists) {
@@ -21,6 +21,7 @@ const login = async (loginData: { contact: string, password: string }) => {
     }
     const jwtPayload = {
         id: isUserExists._id,
+        name: isUserExists.name,
         contact,
         role: isUserExists?.role
     }
@@ -45,6 +46,7 @@ const refreshToken = async (token: string) => {
     }
     const jwtPayload = {
         id: isUserExists._id,
+        name: isUserExists.name,
         contact,
         role,
     }
