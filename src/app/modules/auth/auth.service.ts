@@ -96,14 +96,10 @@ const resetPassword = async (payload: { email: string; token: string; newPasswor
     }
     // console.log(payload);
     const hashedPassword = await bcrypt.hash(payload.newPassword, Number(config.salt_rounds as string))
-    const result = await UserModel.findOneAndUpdate({ password: hashedPassword })
+    const result = await UserModel.findOneAndUpdate({ email: isUserExists.email }, { password: hashedPassword })
 
     console.log(result);
     return result;
-
-
-
-
 }
 
 export const authServices = {
