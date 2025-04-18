@@ -7,8 +7,8 @@ import { authValidator } from "../../middleware/authValidator";
 const router = Router();
 
 router.post('/create-mealProvider', authValidator('mealProvider'), mealProviderController.createMealProvider)
-router.get('/mealProvider', mealProviderController.getMealProviders)
-router.post('mealProvider/:mealProviderId', authValidator('mealProvider'), mealProviderController.getMealProviderById)
+// router.get('/all-providers-profile', authValidator('mealProvider'), mealProviderController.getMealProviders)
+// router.get('//:mealProviderId', authValidator('mealProvider'), mealProviderController.getMealProviderById)
 
 
 

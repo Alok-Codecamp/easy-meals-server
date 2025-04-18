@@ -21,10 +21,22 @@ const getAllUserFromDb = async () => {
     return result;
 }
 
-const getUserByEmail = async (userEmail: string) => {
-    const result = await UserModel.isUserExistsByEmail(userEmail);
+const getUserById = async (id: string) => {
+    const result = await UserModel.findById(id);
     if (!result) {
         throw new Error('No user found!')
+    }
+    return result;
+}
+
+const updateUserFromDb = async (payload: { name: string; email: string; phone: string; }, id: string) => {
+    const isUserExist = await UserModel.findById(id);
+    if (!isUserExist) {
+        throw new Error('This user does not exists!!')
+    }
+    const result = await UserModel.findByIdAndUpdate(id, payload);
+    if (!result) {
+        throw new Error('Faild to update!')
     }
     return result;
 }
@@ -34,5 +46,6 @@ const getUserByEmail = async (userEmail: string) => {
 export const userServices = {
     createUserIntoDb,
     getAllUserFromDb,
-    getUserByEmail,
+    getUserById,
+    updateUserFromDb,
 }

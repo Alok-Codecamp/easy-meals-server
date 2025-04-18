@@ -25,8 +25,9 @@ const getMealProviderFromDb = async () => {
     return result;
 }
 const getMealProviderByIDFromDb = async (mealProviderId: string) => {
-
+    // console.log(mealProviderId);
     const result = await MealProvider.findById(mealProviderId);
+    console.log(result);
     if (!result) {
         throw new Error('No Meal provider found!!')
     }

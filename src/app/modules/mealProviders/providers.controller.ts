@@ -26,7 +26,7 @@ const getMealProviders = asyncWraper(async (req, res) => {
     sendResponse(res, {
         status: status.OK,
         success: true,
-        message: 'meal provider created successfully',
+        message: 'meal provider trive successfully',
         data: result
     })
 })
@@ -37,7 +37,7 @@ const getMealProviderById = asyncWraper(async (req, res) => {
     sendResponse(res, {
         status: status.OK,
         success: true,
-        message: 'meal provider created successfully',
+        message: 'meal provider retrive successfully',
         data: result
     })
 })

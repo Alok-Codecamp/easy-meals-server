@@ -35,7 +35,7 @@ const userSchema = new Schema<IUser, IUserModel>(
         },
         profileImg: {
             type: String,
-            default: ''
+            default: 'https://i.ibb.co/2kR9YQx/default-avatar.png'
         },
         role: {
             type: String,
