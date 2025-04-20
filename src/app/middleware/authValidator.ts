@@ -32,6 +32,7 @@ export const authValidator = (...requiredRoles: TUserRole[]) => {
             throw new Error(`OH! You are not ${requiredRoles.join(', ')}`)
         }
 
+        req.user = { role, id, contact }
         next()
     })
 }

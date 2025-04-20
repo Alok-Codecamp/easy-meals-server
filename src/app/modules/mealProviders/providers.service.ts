@@ -8,24 +8,22 @@ import MealProvider from "./providers.model";
 
 
 
-const createMealProviderInToDb = async (mealProviderData: IMealProvider, id: string) => {
+const createMealProviderInToDb = async (payload: IMealProvider, id: string) => {
+    console.log('front end id ', id);
+
     const isUserExists = await UserModel.findById(id);
 
     if (!isUserExists) {
         throw new Error('User not found!!')
     }
+    const isMealProviderAlreadyExists = await MealProvider.findOne({ mealProvider: id })
 
-    const isMealExists = await MealProvider.findOne({ title: mealProviderData.title })
-
-    if (isMealExists) {
-        throw new Error('This Meal already exists in Store!!')
-    }
-    const mealData = {
-        ...mealProviderData,
-        mealProvider: id,
+    if (isMealProviderAlreadyExists) {
+        throw new Error('Oh! You alredy have a Meal provider profile !! You can create only one profile')
     }
 
-    const result = await MealProvider.create(mealData);
+
+    const result = await MealProvider.create(payload);
 
     return result;
 }
@@ -49,9 +47,31 @@ const getMealProviderByIDFromDb = async (mealProviderId: string) => {
     return result;
 }
 
+const updateProviderInToDb = async (payload: IMealProvider, id: string) => {
+
+
+    const isUserExists = await UserModel.findById(id);
+
+    if (!isUserExists) {
+        throw new Error('User not found!!')
+    }
+    const isMealProviderAlreadyExists = await MealProvider.findOne({ mealProvider: id })
+
+    if (!isMealProviderAlreadyExists) {
+        throw new Error('meal provider not found')
+    }
+
+
+    const result = await MealProvider.findOneAndUpdate({ mealProvider: id }, payload, { new: true });
+
+    return result;
+}
+
+
 export const mealProviderServices = {
     createMealProviderInToDb,
     getMealProvidersFromDb,
     getMealProviderByIDFromDb,
+    updateProviderInToDb
 
 }

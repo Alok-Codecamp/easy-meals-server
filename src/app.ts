@@ -7,6 +7,7 @@ import { authRoutes } from './app/modules/auth/auth.routes';
 import cookieParser from "cookie-parser";
 import { mealProviderRoutes } from './app/modules/mealProviders/providers.routes';
 import { orderRoutes } from './app/modules/orders/orders.routes';
+import { mealRoutes } from './app/modules/meals/meals.route';
 const app: Application = express();
 
 app.use(express.json())
@@ -21,6 +22,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/users', userRoutes)
 app.use('/auth', authRoutes)
 app.use('/providers', mealProviderRoutes)
+app.use('/', mealRoutes)
 app.use('/orders', orderRoutes)
 
 

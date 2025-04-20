@@ -1,15 +1,9 @@
 import mongoose, { Schema, Document, model } from "mongoose";
-import { IMealProvider, TCuisineSpecialties, TcustomerReview, TMeal } from "./providers.interface";
+import { IMealProvider, TAvailableMealOptions, TAvailablity, TCuisineSpecialties, TcustomerReview } from "./providers.interface";
+
 
 // Define Meal Schema
-const MealSchema = new Schema<TMeal>({
-    mealTitle: { type: String, required: true },
-    description: { type: String, required: true },
-    price: { type: String, required: true },
-    image: { type: String, required: true },
-    isAvailable: { type: Boolean, required: true, default: true },
 
-});
 
 // Define Customer Review Schema
 const CustomerReviewSchema = new Schema<TcustomerReview>({
@@ -28,6 +22,18 @@ const cuisineSpecialtiesSchema = new Schema<TCuisineSpecialties>({
         required: true,
     }
 })
+const availableMealOptions = new Schema<TAvailableMealOptions>({
+    value: {
+        type: String,
+        required: true,
+    }
+})
+const availabilitySchema = new Schema<TAvailablity>({
+    value: {
+        type: String,
+        required: true,
+    }
+})
 
 // Define Meal Provider Schema
 const MealProviderSchema = new Schema<IMealProvider>({
@@ -36,14 +42,15 @@ const MealProviderSchema = new Schema<IMealProvider>({
         ref: 'User',
         required: true
     },
-    title: { type: String, required: true },
+
     cuisineSpecialties: [cuisineSpecialtiesSchema],
-    availableMeals: [MealSchema],
+    availableMealOptions: [availableMealOptions],
+    availability: [availabilitySchema],
     pricing: {
         min: { type: String, required: true },
         max: { type: String, required: true },
     },
-    experience: { type: String, required: true, default: "1" },
+    experience: { type: String, required: true },
     customerReviews: [CustomerReviewSchema]
 }, { timestamps: true });
 

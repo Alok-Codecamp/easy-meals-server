@@ -12,6 +12,7 @@ router.post('/create-mealProvider/:providerId', requestValidator(createMealProvi
 
 router.get('/all-meals', authValidator('customer'), mealProviderController.getMealProviders)
 router.get('/my-profile/:mealProviderId', authValidator('mealProvider', 'customer'), mealProviderController.getMealProviderById)
+router.put('/update-profile/:providerId', authValidator('mealProvider'), mealProviderController.updateMealProvider)
 
 
 
