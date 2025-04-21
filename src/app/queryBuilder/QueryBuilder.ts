@@ -31,26 +31,8 @@ class QueryBuilder<T> {
         excludeFildes.forEach((field) => {
             delete queryObj[field]
         })
-
-        if (queryObj.minPrice && queryObj.maxPrice) {
-            console.log('inside builder', queryObj)
-
-
-            const min = queryObj.minPrice;
-            const max = queryObj.maxPrice;
-            const isAvailabe = queryObj?.isAvailabe === 'true' ? true : false
-            delete queryObj['minPrice'];
-            delete queryObj['maxPrice'];
-
-            this.modelQuery = this.modelQuery.find({
-                'availableMeals.isAvailable': true
-            })
-        } else {
-
-            this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>)
-
-        }
-
+        console.log(queryObj);
+        this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>)
         return this;
     }
 

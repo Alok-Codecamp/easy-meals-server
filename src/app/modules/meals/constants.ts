@@ -1,0 +1,1 @@
+export const searchAbleFields = ['title', 'price', 'preparationTime', 'category', 'tags', 'ingredients', 'portion'];

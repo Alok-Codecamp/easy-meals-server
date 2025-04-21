@@ -20,32 +20,51 @@ const createMeal = asyncWraper(async (req, res) => {
     })
 })
 
-// define controller function for get  all MealProvider data 
+// define controller function for get  all meal data 
 
-// const getMealProviders = asyncWraper(async (req, res) => {
-//     console.log(req.query);
-//     const result = await mealProviderServices.getMealProvidersFromDb(req.query);
+const getAllMeals = asyncWraper(async (req, res) => {
+    console.log(req.query);
+    const result = await mealServices.getAllMealsFromDb(req.query);
 
-//     sendResponse(res, {
-//         status: status.OK,
-//         success: true,
-//         message: 'meal provider trive successfully',
-//         data: result
-//     })
-// })
-// const getMealProviderById = asyncWraper(async (req, res) => {
-//     const { mealProviderId } = req.params;
-//     const result = await mealProviderServices.getMealProviderByIDFromDb(mealProviderId);
+    sendResponse(res, {
+        status: status.OK,
+        success: true,
+        message: 'meal rtrive successfully',
+        data: result
+    })
+})
 
-//     sendResponse(res, {
-//         status: status.OK,
-//         success: true,
-//         message: 'meal provider retrive successfully',
-//         data: result
-//     })
-// })
+// defaine controller function for get meal by id 
+const getMealById = asyncWraper(async (req, res) => {
+    const { mealId } = req.params;
+
+    const result = await mealServices.getMealByIdFromDb(mealId);
+
+    sendResponse(res, {
+        status: status.OK,
+        success: true,
+        message: 'meal rtrive successfully',
+        data: result
+    })
+})
+
+// define controller function for update meal 
+const updateMeal = asyncWraper(async (req, res) => {
+    const { mealId } = req.params;
+    const result = await mealServices.updateMealIntoBd(req.body, mealId)
+
+    sendResponse(res, {
+        status: status.OK,
+        success: true,
+        message: 'meal updated successfully',
+        data: result
+    })
+})
 
 
 export const mealsController = {
     createMeal,
+    getAllMeals,
+    getMealById,
+    updateMeal,
 }

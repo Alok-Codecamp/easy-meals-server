@@ -22,7 +22,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/users', userRoutes)
 app.use('/auth', authRoutes)
 app.use('/providers', mealProviderRoutes)
-app.use('/', mealRoutes)
+app.use('/meals', mealRoutes)
 app.use('/orders', orderRoutes)
 
 
