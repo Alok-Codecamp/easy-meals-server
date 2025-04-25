@@ -32,7 +32,6 @@ const authValidator = (...requiredRoles) => {
         if (requiredRoles && !requiredRoles.includes(role)) {
             throw new Error(`OH! You are not ${requiredRoles.join(', ')}`);
         }
-        // assign user property inside request 
         req.user = { role, id, contact };
         next();
     }));

@@ -22,6 +22,7 @@ const login = (0, asyncWraper_1.default)((req, res) => __awaiter(void 0, void 0,
     const result = yield auth_service_1.authServices.login(req.body);
     const { accessToken, refreshToken } = result;
     res.cookie('refreshToken', refreshToken, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
         secure: config_1.default.app_mode === 'production',
         httpOnly: true,
     });
@@ -32,6 +33,7 @@ const login = (0, asyncWraper_1.default)((req, res) => __awaiter(void 0, void 0,
         data: result
     });
 }));
+// RiceOverLoads$2565
 const refreshToken = (0, asyncWraper_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { refreshToken } = req.cookies;
     const result = yield auth_service_1.authServices.refreshToken(refreshToken);

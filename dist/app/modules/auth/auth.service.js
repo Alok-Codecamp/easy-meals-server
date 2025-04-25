@@ -55,13 +55,13 @@ const refreshToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
         contact,
         role,
     };
-    const newToken = (0, auth_utils_1.createToken)(jwtPayload, config_1.default.jwt_access_secret, config_1.default.jwt_access_expiresIn);
+    const newToken = (0, auth_utils_1.createToken)(jwtPayload, config_1.default.jwt_refresh_expiresIn, config_1.default.jwt_access_expiresIn);
     return newToken;
 });
 const forgetPassword = (email) => __awaiter(void 0, void 0, void 0, function* () {
     const isUserExists = yield user_model_1.UserModel.isUserExistsByEmail(email);
     if (!isUserExists) {
-        throw new Error('No user found!!');
+        throw new Error('You are not registerd !!');
     }
     const jwtPayload = {
         contact: isUserExists.email,

@@ -14,5 +14,6 @@ exports.default = {
     salt_rounds: process.env.SALT_ROUNDS,
     jwt_access_secret: process.env.JWT_ACCESS_SECRET,
     jwt_access_expiresIn: process.env.JWT_ACCESS_EXPIRESIN,
+    jwt_refresh_expiresIn: process.env.JWT_REFRESH_EXPIRESIN,
     google_app_pass: process.env.GOOGLE_APP_PASS,
 };

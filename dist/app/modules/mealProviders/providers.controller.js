@@ -19,18 +19,19 @@ const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 const providers_service_1 = require("./providers.service");
 const createMealProvider = (0, asyncWraper_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const mealProviderData = req.body;
-    console.log(mealProviderData);
-    // const result = await mealProviderServices.createMealProviderInToDb(mealProviderData);
+    const providerId = req.params.providerId;
+    const result = yield providers_service_1.mealProviderServices.createMealProviderInToDb(mealProviderData, providerId);
     (0, sendResponse_1.default)(res, {
         status: http_status_1.default.OK,
         success: true,
         message: 'meal provider created successfully',
-        data: ''
+        data: result
     });
 }));
 // define controller function for get  all MealProvider data 
 const getMealProviders = (0, asyncWraper_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield providers_service_1.mealProviderServices.getMealProviderFromDb();
+    console.log(req.query);
+    const result = yield providers_service_1.mealProviderServices.getMealProvidersFromDb(req.query);
     (0, sendResponse_1.default)(res, {
         status: http_status_1.default.OK,
         success: true,
@@ -48,8 +49,21 @@ const getMealProviderById = (0, asyncWraper_1.default)((req, res) => __awaiter(v
         data: result
     });
 }));
+const updateMealProvider = (0, asyncWraper_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const mealProviderData = req.body;
+    const providerId = req.params.providerId;
+    console.log('from p u', providerId);
+    const result = yield providers_service_1.mealProviderServices.updateProviderInToDb(mealProviderData, providerId);
+    (0, sendResponse_1.default)(res, {
+        status: http_status_1.default.OK,
+        success: true,
+        message: 'meal provider updated successfully',
+        data: result
+    });
+}));
 exports.mealProviderController = {
     createMealProvider,
     getMealProviders,
     getMealProviderById,
+    updateMealProvider
 };

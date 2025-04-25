@@ -40,7 +40,7 @@ const userSchema = new mongoose_1.Schema({
         type: Boolean,
         default: false
     },
-    address: {
+    shippingAddress: {
         type: String,
     },
     profileImg: {

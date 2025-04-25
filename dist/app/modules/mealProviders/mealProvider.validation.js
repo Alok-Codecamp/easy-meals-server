@@ -1,35 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createMealProviderZodSchema = exports.CustomerReviewZodSchema = exports.MealZodSchema = void 0;
+exports.createMealProviderZodSchema = exports.cuisineSpecialties = exports.CustomerReviewZodSchema = void 0;
 const zod_1 = require("zod");
-const mongoose_1 = require("mongoose");
 //  Meal Schema
-exports.MealZodSchema = zod_1.z.object({
-    mealTitle: zod_1.z.string().min(1, "Title is required"),
-    description: zod_1.z.string().min(1, "Description is required"),
-    price: zod_1.z.string().min(1, "Price is required"), // string-based price
-    isAvailable: zod_1.z.boolean().default(true),
-});
 //  Customer Review Schema
 exports.CustomerReviewZodSchema = zod_1.z.object({
     rating: zod_1.z.number().min(1).max(5),
     review: zod_1.z.string().min(1, "Review is required"),
     reviewer: zod_1.z
         .string()
-        .refine((val) => mongoose_1.Types.ObjectId.isValid(val), {
-        message: "Invalid ObjectId for reviewer",
-    }),
+});
+exports.cuisineSpecialties = zod_1.z.object({
+    value: zod_1.z.string()
 });
 //  Meal Provider Schema
 exports.createMealProviderZodSchema = zod_1.z.object({
-    MealProvider: zod_1.z.string(),
-    title: zod_1.z.string().min(1, "Name is required"),
-    cuisineSpecialties: zod_1.z.array(zod_1.z.string().min(1)),
-    availableMeals: zod_1.z.array(exports.MealZodSchema),
+    title: zod_1.z.string({ required_error: 'Meal provider title is required!' }).min(1, { message: "meal provider titile should be at least one charecter long" }),
+    cuisineSpecialties: zod_1.z.array(exports.cuisineSpecialties),
+    availableMealOptions: zod_1.z.array(zod_1.z.string({ required_error: 'Please Select at least one Available meal options' })).min(1, { message: 'select at least one option' }),
+    availability: zod_1.z.array(zod_1.z.string({ required_error: 'Please Select at least one Availability options' })).min(1, { message: 'select at least one option' }),
     pricing: zod_1.z.object({
-        min: zod_1.z.number(),
-        max: zod_1.z.number(),
+        min: zod_1.z.string(),
+        max: zod_1.z.string(),
     }),
-    experience: zod_1.z.number().min(0),
+    experience: zod_1.z.string({ required_error: 'Meal provider exprience is required' }).min(1, { message: 'At least 1 year of relevant experience required.' }),
     customerReviews: zod_1.z.array(exports.CustomerReviewZodSchema).optional(),
 });

@@ -13,7 +13,8 @@ exports.orderServices = void 0;
 const user_model_1 = require("../user/user.model");
 const orders_model_1 = require("./orders.model");
 const createOrderIntoDb = (orderData) => __awaiter(void 0, void 0, void 0, function* () {
-    const isUserExist = yield user_model_1.UserModel.findById(orderData === null || orderData === void 0 ? void 0 : orderData.customerID);
+    console.log(orderData);
+    const isUserExist = yield user_model_1.UserModel.findById(orderData.customerId);
     if (!isUserExist) {
         throw new Error('user not found!');
     }
@@ -32,10 +33,8 @@ const getOrdersPlacedByCustomerFromDb = (userId) => __awaiter(void 0, void 0, vo
     if (!isUserExist) {
         throw new Error('user not found!');
     }
-    const orders = yield orders_model_1.OrderModel.find({ customerID: userId });
-    if (!orders.length) {
-        throw new Error('No order found!');
-    }
+    const orders = yield orders_model_1.OrderModel.find({ customerId: userId });
+    console.log(orders);
     return orders;
 });
 const updateOrderIntoDb = (updateOrderData) => __awaiter(void 0, void 0, void 0, function* () {

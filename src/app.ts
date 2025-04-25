@@ -10,8 +10,10 @@ import { orderRoutes } from './app/modules/orders/orders.routes';
 import { mealRoutes } from './app/modules/meals/meals.route';
 const app: Application = express();
 
+// vercel link https://easy-meals-silk.vercel.app/
+// local Link http://localhost:3000 
 app.use(express.json())
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
+app.use(cors({ origin: ' https://easy-meals-silk.vercel.app/', credentials: true }))
 app.use(cookieParser());
 
 
