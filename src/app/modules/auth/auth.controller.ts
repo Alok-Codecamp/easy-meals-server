@@ -13,6 +13,7 @@ const login = asyncWraper(async (req, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         secure: false,
         httpOnly: true,
+        sameSite: 'none',
     })
     sendResponse(res, {
         status: status.OK,
