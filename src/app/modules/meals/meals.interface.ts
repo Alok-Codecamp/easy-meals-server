@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 
 export interface IMeals {
-    providerId: string;
+    providerId: Types.ObjectId;
     title: string;
     description: string;
     price: string;
@@ -11,5 +11,6 @@ export interface IMeals {
     ingredients: string[];
     preparationTime: string;
     portion: string[];
-    isAvailable: boolean;
+    ratings: number;
+    isAvailable: "Yes" | "No";
 }

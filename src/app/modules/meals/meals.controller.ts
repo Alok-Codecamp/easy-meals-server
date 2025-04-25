@@ -23,7 +23,6 @@ const createMeal = asyncWraper(async (req, res) => {
 // define controller function for get  all meal data 
 
 const getAllMeals = asyncWraper(async (req, res) => {
-    console.log(req.query);
     const result = await mealServices.getAllMealsFromDb(req.query);
 
     sendResponse(res, {
@@ -50,7 +49,8 @@ const getMealById = asyncWraper(async (req, res) => {
 
 // define controller function for update meal 
 const updateMeal = asyncWraper(async (req, res) => {
-    const { mealId } = req.params;
+    const mealId = req.params.mealId;
+    console.log(req.body);
     const result = await mealServices.updateMealIntoBd(req.body, mealId)
 
     sendResponse(res, {

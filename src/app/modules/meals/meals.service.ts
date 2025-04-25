@@ -22,7 +22,7 @@ const createMealsIntoDb = async (payload: IMeals) => {
 
 const getAllMealsFromDb = async (search: Record<string, unknown>) => {
 
-    const mealsQuery = new QueryBuilder(Meals.find(), search).search(searchAbleFields).filter().sort().fields().paginate();
+    const mealsQuery = new QueryBuilder(Meals.find().populate({ path: 'providerId', populate: { path: 'mealProvider' } }), search).search(searchAbleFields).filter().sort().fields().paginate();
     const result = await mealsQuery.modelQuery;
     return result;
 }
@@ -30,14 +30,14 @@ const getAllMealsFromDb = async (search: Record<string, unknown>) => {
 // define service function find meal by id 
 const getMealByIdFromDb = async (mealId: string) => {
 
-    const result = await Meals.findById(mealId)
+    const result = await Meals.findById(mealId).populate({ path: 'providerId', populate: { path: 'mealProvider' } })
 
     return result;
 }
 
 // define service function for update meal 
 const updateMealIntoBd = async (payload: IMeals, mealId: string) => {
-
+    console.log(payload, mealId);
     const isMealproviderExists = await MealProvider.findById(payload.providerId);
 
     if (!isMealproviderExists) {

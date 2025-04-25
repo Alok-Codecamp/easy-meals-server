@@ -30,14 +30,14 @@ const getOrders = asyncWraper(async (req, res) => {
     })
 })
 const getOrdersPlacedByCustomer = asyncWraper(async (req: Request, res: Response) => {
-
-    // const result = await orderServices.getOrdersPlacedByCustomerFromDb(userData?.id as string);
+    const userId = req.user.id;
+    const result = await orderServices.getOrdersPlacedByCustomerFromDb(userId);
 
     sendResponse(res, {
         status: status.OK,
         success: true,
         message: 'Your order retrive successfully',
-        data: ''
+        data: result
     })
 })
 

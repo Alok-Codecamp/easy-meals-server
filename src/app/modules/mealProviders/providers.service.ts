@@ -49,7 +49,7 @@ const getMealProviderByIDFromDb = async (mealProviderId: string) => {
 
 const updateProviderInToDb = async (payload: IMealProvider, id: string) => {
 
-
+    console.log('updateProviderservide', id);
     const isUserExists = await UserModel.findById(id);
 
     if (!isUserExists) {

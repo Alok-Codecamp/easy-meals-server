@@ -61,7 +61,7 @@ const forgetPassword = async (email: string) => {
     const isUserExists = await UserModel.isUserExistsByEmail(email);
 
     if (!isUserExists) {
-        throw new Error('No user found!!')
+        throw new Error('You are not registerd !!')
     }
 
     const jwtPayload = {

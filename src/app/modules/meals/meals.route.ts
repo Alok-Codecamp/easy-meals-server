@@ -15,7 +15,7 @@ router.get('/all-meals', mealsController.getAllMeals);
 // get meal by id 
 router.get('/:mealId', mealsController.getMealById);
 // update meal route 
-router.put('/update-meal/:mealId', authValidator('mealProvider'), requestValidator(mealValidationSchema.creteMealValidationZodSchema), mealsController.updateMeal)
+router.put('/update-meal/:mealId', authValidator('mealProvider'), mealsController.updateMeal)
 
 
 

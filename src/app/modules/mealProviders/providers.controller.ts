@@ -9,7 +9,7 @@ import { mealProviderServices } from "./providers.service";
 const createMealProvider = asyncWraper(async (req, res) => {
     const mealProviderData = req.body;
     const providerId = req.params.providerId;
-    console.log('backend id', req.user.id);
+
     const result = await mealProviderServices.createMealProviderInToDb(mealProviderData, providerId);
 
     sendResponse(res, {
@@ -47,7 +47,7 @@ const getMealProviderById = asyncWraper(async (req, res) => {
 const updateMealProvider = asyncWraper(async (req, res) => {
     const mealProviderData = req.body;
     const providerId = req.params.providerId;
-    console.log(providerId);
+    console.log('from p u', providerId);
     const result = await mealProviderServices.updateProviderInToDb(mealProviderData, providerId);
 
     sendResponse(res, {

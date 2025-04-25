@@ -10,17 +10,14 @@ export type TcustomerReview = {
 export type TCuisineSpecialties = {
     value: string
 }
-export type TAvailableMealOptions = {
-    value: string
-}
-export type TAvailablity = {
-    value: string
-}
+
+
 export interface IMealProvider {
+    title: string;
     mealProvider: Types.ObjectId,
     cuisineSpecialties: TCuisineSpecialties[];
-    availableMealOptions: TAvailableMealOptions[];
-    availability: TAvailablity[];
+    availableMealOptions: string[];
+    availability: string[];
     pricing: { min: string; max: string };
     experience: string;
 

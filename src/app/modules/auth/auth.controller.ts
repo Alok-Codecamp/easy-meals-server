@@ -10,6 +10,7 @@ const login = asyncWraper(async (req, res) => {
 
     const { accessToken, refreshToken } = result;
     res.cookie('refreshToken', refreshToken, {
+        maxAge: 7 * 24 * 60 * 60 * 1000,
         secure: config.app_mode === 'production',
         httpOnly: true,
     })

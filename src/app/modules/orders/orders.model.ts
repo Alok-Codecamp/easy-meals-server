@@ -1,26 +1,52 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 import { IOrders } from "./orders.interface";
 
 
 
 const OrderSchema = new Schema<IOrders>({
-    MealSelection: {
-        type: Number,
+    mealId: {
+        type: Types.ObjectId,
+        ref: "Meal",
         required: true,
     },
-    dietaryPreferences: {
+    quantity: {
         type: String,
         required: true,
     },
-    customerID: {
-        type: Schema.ObjectId,
-        ref: 'User',
+    tags: {
+        type: [String],
+        default: [],
+    },
+    ingredients: {
+        type: [String],
+        default: [],
+    },
+    category: {
+        type: [String],
+        default: [],
+    },
+    customerId: {
+        type: Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    totalPrice: {
+        type: Number,
+        required: true,
+    },
+    portion: {
+        type: [String],
+        default: [],
+    },
+    schedule: {
+        type: String, // Or Date if you're storing it as a Date object
         required: true,
     },
     status: {
         type: String,
-        enum: ["pending", "in-progress", "delivered"]
-    }
+        enum: ["pending", "in-progress", "delivered"],
+        default: "pending",
+    },
 }, { timestamps: true })
 
 

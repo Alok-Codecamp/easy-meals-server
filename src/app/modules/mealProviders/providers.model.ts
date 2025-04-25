@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document, model } from "mongoose";
-import { IMealProvider, TAvailableMealOptions, TAvailablity, TCuisineSpecialties, TcustomerReview } from "./providers.interface";
+import { IMealProvider, TCuisineSpecialties, TcustomerReview } from "./providers.interface";
 
 
 // Define Meal Schema
@@ -22,21 +22,10 @@ const cuisineSpecialtiesSchema = new Schema<TCuisineSpecialties>({
         required: true,
     }
 })
-const availableMealOptions = new Schema<TAvailableMealOptions>({
-    value: {
-        type: String,
-        required: true,
-    }
-})
-const availabilitySchema = new Schema<TAvailablity>({
-    value: {
-        type: String,
-        required: true,
-    }
-})
 
 // Define Meal Provider Schema
 const MealProviderSchema = new Schema<IMealProvider>({
+    title: { type: String },
     mealProvider: {
         type: Schema.ObjectId,
         ref: 'User',
@@ -44,8 +33,8 @@ const MealProviderSchema = new Schema<IMealProvider>({
     },
 
     cuisineSpecialties: [cuisineSpecialtiesSchema],
-    availableMealOptions: [availableMealOptions],
-    availability: [availabilitySchema],
+    availableMealOptions: [String],
+    availability: [String],
     pricing: {
         min: { type: String, required: true },
         max: { type: String, required: true },

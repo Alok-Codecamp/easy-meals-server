@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { UserModel } from "../user/user.model"
 import { IOrders } from "./orders.interface"
 import { OrderModel } from "./orders.model"
@@ -7,7 +8,8 @@ import { OrderModel } from "./orders.model"
 
 
 const createOrderIntoDb = async (orderData: IOrders) => {
-    const isUserExist = await UserModel.findById(orderData?.customerID);
+    console.log(orderData);
+    const isUserExist = await UserModel.findById(orderData.customerId);
     if (!isUserExist) {
         throw new Error('user not found!')
     }
@@ -35,11 +37,8 @@ const getOrdersPlacedByCustomerFromDb = async (userId: string) => {
         throw new Error('user not found!')
     }
 
-    const orders = await OrderModel.find({ customerID: userId })
-    if (!orders.length) {
-        throw new Error('No order found!')
-    }
-
+    const orders = await OrderModel.find({ customerId: userId })
+    console.log(orders);
     return orders
 }
 

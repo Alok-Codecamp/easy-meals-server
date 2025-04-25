@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Types } from "mongoose";
+import { title } from "process";
 
 //  Meal Schema
 
@@ -17,9 +18,10 @@ export const cuisineSpecialties = z.object({
 
 //  Meal Provider Schema
 export const createMealProviderZodSchema = z.object({
+    title: z.string({ required_error: 'Meal provider title is required!' }).min(1, { message: "meal provider titile should be at least one charecter long" }),
     cuisineSpecialties: z.array(cuisineSpecialties),
-    availableMealOptions: z.array(z.object({ value: z.string({ required_error: 'At least one meal option is required!' }) })),
-    availability: z.array(z.object({ value: z.string({ required_error: 'add when you are available!' }) })),
+    availableMealOptions: z.array(z.string({ required_error: 'Please Select at least one Available meal options' })).min(1, { message: 'select at least one option' }),
+    availability: z.array(z.string({ required_error: 'Please Select at least one Availability options' })).min(1, { message: 'select at least one option' }),
     pricing: z.object({
         min: z.string(),
         max: z.string(),

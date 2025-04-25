@@ -21,8 +21,15 @@ export const creteMealValidationZodSchema = z.object({
     portion: z.array(z.string()).refine((value) => value.some((item) => item), {
         message: "You have to select at least one tag.",
     }),
+    ratings: z.number().optional(),
+    isAvailable: z.enum(["yes", "no"], {
+        required_error: "Meal availability is required",
+        invalid_type_error: "Availability must be either 'Yes' or 'No'",
+    }),
 });
 
+const updateMealValidationZodSchema = creteMealValidationZodSchema.partial();
 export const mealValidationSchema = {
     creteMealValidationZodSchema,
+    updateMealValidationZodSchema,
 }

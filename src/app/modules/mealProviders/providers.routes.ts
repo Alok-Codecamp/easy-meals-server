@@ -10,7 +10,7 @@ const router = Router();
 
 router.post('/create-mealProvider/:providerId', requestValidator(createMealProviderZodSchema), authValidator('mealProvider'), mealProviderController.createMealProvider);
 
-router.get('/all-meals', authValidator('customer'), mealProviderController.getMealProviders)
+router.get('/all-provider', mealProviderController.getMealProviders)
 router.get('/my-profile/:mealProviderId', authValidator('mealProvider', 'customer'), mealProviderController.getMealProviderById)
 router.put('/update-profile/:providerId', authValidator('mealProvider'), mealProviderController.updateMealProvider)
 
