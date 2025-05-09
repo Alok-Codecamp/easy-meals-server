@@ -7,7 +7,7 @@ import asyncWraper from "../utils/asyncWraper"
 
 
 
-export const authValidator = (...requiredRoles: TUserRole[]) => {
+export const authValidator = (...requiredRoles: string[]) => {
 
     return asyncWraper(async (req: Request, res: Response, next: NextFunction) => {
 
@@ -24,9 +24,10 @@ export const authValidator = (...requiredRoles: TUserRole[]) => {
         if (!decoded) {
             throw new Error('Your login session expired! please login!')
         }
+        console.log('line-27', requiredRoles);
         const { contact, role, id } = decoded;
 
-        console.log(decoded);
+
         if (requiredRoles && !requiredRoles.includes(role)) {
 
             throw new Error(`OH! You are not ${requiredRoles.join(', ')}`)

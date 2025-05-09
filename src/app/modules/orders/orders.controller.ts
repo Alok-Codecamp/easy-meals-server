@@ -44,7 +44,9 @@ const getOrdersPlacedByCustomer = asyncWraper(async (req: Request, res: Response
 // controller function for update order 
 const updateOrder = asyncWraper(async (req, res) => {
     const updateOrderData = req.body;
-    const result = await orderServices.updateOrderIntoDb(updateOrderData)
+    const orderID = req.params.orderId;
+
+    const result = await orderServices.updateOrderIntoDb(updateOrderData, orderID)
 
     sendResponse(res, {
         status: status.OK,

@@ -37,7 +37,10 @@ const getOrdersPlacedByCustomerFromDb = (userId) => __awaiter(void 0, void 0, vo
     console.log(orders);
     return orders;
 });
-const updateOrderIntoDb = (updateOrderData) => __awaiter(void 0, void 0, void 0, function* () {
+const updateOrderIntoDb = (updateOrderData, id, orderId) => __awaiter(void 0, void 0, void 0, function* () {
+    // if (updateOrderData.providerId !==)
+    const result = yield orders_model_1.OrderModel.findByIdAndUpdate(orderId, updateOrderData, { new: true });
+    return result;
 });
 exports.orderServices = {
     createOrderIntoDb,

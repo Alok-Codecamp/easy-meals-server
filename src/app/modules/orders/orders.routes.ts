@@ -12,7 +12,7 @@ router.get('/providers/orders', authValidator('mealProvider'), orderController.g
 
 router.get('/customers/orders', authValidator('customer'), orderController.getOrdersPlacedByCustomer);
 
-router.put('/providers/response', authValidator('mealProvider'), orderController.updateOrder);
+router.put('/update-order/:orderId', authValidator('mealProvider', 'customer'), orderController.updateOrder);
 
 
 export const orderRoutes = router;

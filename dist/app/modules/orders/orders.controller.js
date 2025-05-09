@@ -49,7 +49,9 @@ const getOrdersPlacedByCustomer = (0, asyncWraper_1.default)((req, res) => __awa
 // controller function for update order 
 const updateOrder = (0, asyncWraper_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const updateOrderData = req.body;
-    const result = yield orders_service_1.orderServices.updateOrderIntoDb(updateOrderData);
+    const orderID = req.params.orderId;
+    const providerId = req.user;
+    const result = yield orders_service_1.orderServices.updateOrderIntoDb(updateOrderData, providerId.id, orderID);
     (0, sendResponse_1.default)(res, {
         status: http_status_1.default.OK,
         success: true,

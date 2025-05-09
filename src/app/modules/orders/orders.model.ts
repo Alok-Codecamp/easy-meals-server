@@ -11,7 +11,7 @@ const OrderSchema = new Schema<IOrders>({
     },
     quantity: {
         type: String,
-        required: true,
+        required: true
     },
     tags: {
         type: [String],
@@ -44,7 +44,7 @@ const OrderSchema = new Schema<IOrders>({
     },
     status: {
         type: String,
-        enum: ["pending", "in-progress", "delivered"],
+        enum: ["pending", "in-progress", "delivered", "cancled"],
         default: "pending",
     },
 }, { timestamps: true })

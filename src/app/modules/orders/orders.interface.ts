@@ -11,5 +11,5 @@ export interface IOrders {
     totalPrice: number;
     portion: string[];
     schedule: string;
-    status: "pending" | "in-progress" | "delivered"
+    status: "pending" | "in-progress" | "delivered" | "cancled"
 }
