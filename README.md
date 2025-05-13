@@ -1,6 +1,6 @@
 # Easy Meals Server Application
 
-## Live Link: https://easy-meals-server.onrender.com/
+## Live server: https://easy-meals-server.vercel.app
 
 # Overview
 
