@@ -12,7 +12,26 @@ const MealSchema = new Schema<IMeals>({
     ingredients: { type: [String], required: true },
     preparationTime: { type: String, required: true },
     portion: { type: [String], required: true },
-    ratings: { type: Number, required: true, default: 5 },
+    ratings: {
+        average: Number,
+        count: Number,
+        breakdown: {
+            5: Number,
+            4: Number,
+            3: Number,
+            2: Number,
+            1: Number
+        },
+        lastRatedAt: Date,
+        ratedUsers: [
+            {
+                userId: Schema.Types.ObjectId,
+                rating: Number,
+                comment: String,
+                date: Date
+            }
+        ]
+    },
     isAvailable: {
         type: String,
         enum: ["Yes", "No"],

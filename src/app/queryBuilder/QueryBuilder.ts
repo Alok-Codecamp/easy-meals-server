@@ -31,15 +31,15 @@ class QueryBuilder<T> {
         excludeFildes.forEach((field) => {
             delete queryObj[field]
         })
+
         if (queryObj.tags) {
             queryObj.tags = { $in: queryObj.tags };
         }
         if (queryObj.category) {
             queryObj.category = { $in: queryObj.category };
         }
-        if (queryObj.ratings) {
-
-            queryObj.ratings = { $gte: Number(queryObj.ratings) }
+        if (queryObj['ratings.average']) {
+            queryObj['ratings.average'] = { $gte: queryObj['ratings.average'] }
         }
         if (queryObj.providerId) {
 
@@ -50,7 +50,7 @@ class QueryBuilder<T> {
                 console.error('Invalid providerId format:', queryObj.providerId);
             }
         }
-        console.log('filter now', queryObj);
+
         this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>)
         return this;
     }

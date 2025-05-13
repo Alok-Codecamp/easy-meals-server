@@ -16,7 +16,4 @@ router.put('/update-profile/:userId', authValidator('customer', 'mealProvider'),
 
 
 
-
-
-
 export const userRoutes = router;

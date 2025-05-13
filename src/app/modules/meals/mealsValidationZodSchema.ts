@@ -1,6 +1,18 @@
 import z from 'zod';
+export const RatedUserSchema = z.object({
+    userId: z.string().length(24, "Invalid ObjectId"), // if it's passed as string
+    rating: z.number().min(1).max(5),
+    comment: z.string().min(1).max(500),
+    date: z.coerce.date(), // allows ISO string or Date object
+});
 
-
+export const RatingBreakdownSchema = z.object({
+    5: z.number().min(0),
+    4: z.number().min(0),
+    3: z.number().min(0),
+    2: z.number().min(0),
+    1: z.number().min(0),
+});
 
 export const creteMealValidationZodSchema = z.object({
     providerId: z.string().optional(),
@@ -21,7 +33,13 @@ export const creteMealValidationZodSchema = z.object({
     portion: z.array(z.string()).refine((value) => value.some((item) => item), {
         message: "You have to select at least one tag.",
     }),
-    ratings: z.number().optional(),
+    ratings: z.object({
+        average: z.number().min(0).max(5),
+        count: z.number().int().min(0),
+        breakdown: RatingBreakdownSchema,
+        lastRatedAt: z.coerce.date(),
+        ratedUsers: z.array(RatedUserSchema),
+    }).optional(),
     isAvailable: z.enum(["yes", "no"], {
         required_error: "Meal availability is required",
         invalid_type_error: "Availability must be either 'Yes' or 'No'",
